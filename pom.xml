@@ -4,7 +4,7 @@
     <groupId>com.wenshenjun</groupId>
     <artifactId>githubPackageTest</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <name>github Package Test</name>
     <description>github Package Test</description>
     <scm>
