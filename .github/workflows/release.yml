@@ -20,8 +20,8 @@ jobs:
     - name: setup-maven-settings
       uses: whelk-io/maven-settings-xml-action@v2
       env:
-        GITHUB_USER: ${{ secrets.github_user }}
-        GITHUB_TOKEN: ${{ secrets.github_token }}
+        GITHUB_USER: x-access-token
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         servers: '[{ "id": "github", "username": "${GITHUB_USER}", "password": "${GITHUB_TOKEN}" }]'
     - name: Build with Maven
