@@ -1,0 +1,30 @@
+name: Deploy artifacts
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2.0.0
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1.3.0
+      with:
+        java-version: 1.8
+    - name: setup-maven-settings
+      uses: whelk-io/maven-settings-xml-action@v2
+      env:
+        GITHUB_USER: ${{ secrets.github_user }}
+        GITHUB_TOKEN: ${{ secrets.github_token }}
+      with:
+        servers: '[{ "id": "github", "username": "${GITHUB_USER}", "password": "${GITHUB_TOKEN}" }]'
+    - name: Build with Maven
+      run: mvn -Dmaven.test.skip=true clean package
+    - name: Deploy to Github Package Registry
+      run: mvn -B -Dmaven.wagon.http.pool=false -DskipTests=true deploy
